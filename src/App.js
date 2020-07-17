@@ -21,9 +21,12 @@ class App extends Component {
     macdLinhaTratado: [{ y:0, label: "loading"}],
     macdHTratado: [{ y:0, label: "loading"}],
   }
+  
+  graficosEp = "https://hb-abc.herokuapp.com/abc-hb/api/grafico";
+  //graficosEp = 'http://localhost:8080/abc-hb/api/grafico';
 
   componentDidMount() {
-    axios.get('http://localhost:8080/abc-hb/api/grafico')
+    axios.get(this.graficosEp)
       .then(response => {
        
         this.setState(
@@ -136,6 +139,8 @@ class App extends Component {
       <div>
         <CanvasJSChart options={options}/>
         <CanvasJSChart options={macdOptions}/>
+        <p>Thiago Orlandini Carvalho Antunes</p>
+        <p>Marcos de Moraes</p>
       </div>
     );
   }
