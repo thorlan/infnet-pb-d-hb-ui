@@ -14,16 +14,18 @@ class App extends Component {
     ema26: {},
     macd: {},
     macdH: {},
+    macdsinal: {},
     graficoTratado: [{ y:0, label: "loading"}],
     ema9Tratado: [{ y:0, label: "loading"}],
     ema12Tratado: [{ y:0, label: "loading"}],
     ema26Tratado: [{ y:0, label: "loading"}],
     macdLinhaTratado: [{ y:0, label: "loading"}],
     macdHTratado: [{ y:0, label: "loading"}],
+    macdSinalTratado: [{ y:0, label: "loading"}],
   }
   
-  graficosEp = "https://hb-abc.herokuapp.com/abc-hb/api/grafico";
-  //graficosEp = 'http://localhost:8080/abc-hb/api/grafico';
+  //graficosEp = "https://hb-abc.herokuapp.com/abc-hb/api/grafico";
+  graficosEp = 'http://localhost:8080/abc-hb/api/grafico';
 
   componentDidMount() {
     axios.get(this.graficosEp)
@@ -36,7 +38,8 @@ class App extends Component {
             ema12: response.data[2],
             ema26: response.data[3],
             macd: response.data[4],
-            macdH: response.data[5]
+            macdH: response.data[5],
+            macdsinal: response.data[6]
           })
 
           this.setState({graficoTratado: this.montaGrafico(this.state.grafico.dia)});
@@ -45,6 +48,7 @@ class App extends Component {
           this.setState({ema26Tratado: this.montaGrafico(this.state.ema26.dia)});
           this.setState({macdLinhaTratado: this.montaGrafico(this.state.macd.dia)});
           this.setState({macdHTratado: this.montaGrafico(this.state.macdH.dia)});
+          this.setState({macdSinalTratado: this.montaGrafico(this.state.macdsinal.dia)});
           
       });
   }
@@ -122,9 +126,15 @@ class App extends Component {
       },
       data: [{
         type: "spline",
-        name: "MACD Linha",
+        name: "MACD (26,12)",
         showInLegend: true,
         dataPoints: this.state.macdLinhaTratado
+      },
+      {
+        type: "spline",
+        name: "MACD (9))",
+        showInLegend: true,
+        dataPoints: this.state.macdSinalTratado
       },
       {
         type: "column",
