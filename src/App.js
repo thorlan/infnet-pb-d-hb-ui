@@ -24,8 +24,8 @@ class App extends Component {
     macdSinalTratado: [{ y:0, label: "loading"}],
   }
   
-  //graficosEp = "https://hb-abc.herokuapp.com/abc-hb/api/grafico";
-  graficosEp = 'http://localhost:8080/abc-hb/api/grafico';
+  graficosEp = "https://hb-abc.herokuapp.com/abc-hb/api/grafico";
+  //graficosEp = 'http://localhost:8080/abc-hb/api/grafico';
 
   componentDidMount() {
     axios.get(this.graficosEp)
